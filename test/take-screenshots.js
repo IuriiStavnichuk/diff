@@ -14,18 +14,27 @@ webdriver.WebDriver.prototype.saveScreenshot = function(filename) {
 };
 
 // example usage
-driver.saveScreenshot('mypage.png');
-
 var urls=[
-    "http://ya.ru",
-    "http://google.com",
-]
+    "http://uplay.ubi.com",
+    "http://shop.ubi.com",
+    "http://uplay.ubi.com/#!/en-GB/games",
+    "http://uplay.ubi.com/#!/en-GB/profile/kasakmamay",
+    "https://account-uplay.ubi.com/en-US",
+    "https://account-uplay.ubi.com/en-GB/account",
+    "https://account-uplay.ubi.com/en-GB/contact-prefs"
+];
+
 
 for (var i in urls) {
 
-    //var folderName= 'screenshots-for-processing/source-versions/';
-    var folderName= 'screenshots-for-processing/target-versions/';
-    var screenshotName= urls[i].split('/').pop()+'.png';
+    var folderName= 'source-versions/';
+    //var folderName= 'test/target-versions/';
+    //var screenshotName= urls[i].split('/').pop()+'.png';
+
+    var screenshotName= urls[i].replace("http://","");
+    screenshotName= screenshotName.replace("https://","");
+    screenshotName= screenshotName.replace("/#!/","");
+    screenshotName= screenshotName.split('/').join('_')+'.png';
 
     driver.get(urls[i]);
     driver.saveScreenshot(folderName+screenshotName);
